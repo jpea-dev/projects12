@@ -1,0 +1,147 @@
+VEHICLEMS Sample CLI Session Outputs
+
+1) Startup and DB connection
+
+✓ Database connected successfully!
+✓ Tables created successfully!
+✓ Sample data inserted successfully!
+
+--- MENU ---
+1. Add Customer
+2. View All Customers
+3. Add Vehicle
+4. View All Vehicles
+5. View All Services
+6. Book Service
+7. View All Bookings
+8. Complete Service
+9. View All Invoices
+10. View All Mechanics
+11. Generate Report
+12. Exit
+
+--- Demonstrations ---
+
+A) view_all_services()
+--- Available Services ---
+ID    Service Name             Description                              Price        Time (min)
+------------------------------------------------------------------------------------------------
+1     General Service          Complete vehicle checkup and maintenance Rs.1500.00   180
+2     Oil Change               Engine oil and filter replacement         Rs.800.00    45
+3     Wheel Alignment          Front and rear wheel alignment            Rs.600.00    60
+4     Brake Service            Brake pad replacement and adjustment      Rs.1200.00   90
+5     AC Service               AC gas refill and cooling system check    Rs.1000.00   120
+6     Battery Replacement      Vehicle battery replacement               Rs.3500.00   30
+7     Tire Rotation            All four tire rotation service            Rs.400.00    45
+
+B) view_all_customers()
+--- All Customers ---
+ID    Name                      Email                     Phone           Status
+--------------------------------------------------------------------------------
+1     John Smith                john@email.com            1234567890      Active
+2     Mary Johnson              mary@email.com            9876543210      Active
+3     Robert Williams           robert@email.com          5551234567      Active
+
+C) add_customer() (example input)
+--- Add New Customer ---
+Enter Customer Name: Alice Parker
+Enter Email: alice@example.com
+Enter Phone: 9988776655
+Enter Address: 12 Oak Lane
+✓ Customer added successfully!
+
+D) add_vehicle() (example input)
+--- Add New Vehicle ---
+Enter Customer ID: 1
+Enter Vehicle Number: MH04GH0001
+Enter Make (Brand): Hyundai
+Enter Model: Verna
+Enter Year: 2022
+Enter Color: Blue
+Enter Fuel Type (Petrol/Diesel/Electric/CNG): Petrol
+✓ Vehicle added successfully!
+
+E) view_all_vehicles()
+--- All Vehicles ---
+ID    Owner                    Vehicle No      Make            Model           Year   Color        Fuel
+----------------------------------------------------------------------------------------------------
+1     John Smith               MH01AB1234      Honda           City            2020   White        Petrol
+2     Mary Johnson             MH02CD5678      Toyota          Innova          2019   Silver       Diesel
+3     Robert Williams          MH03EF9012      Maruti          Swift           2021   Red          Petrol
+4     Alice Parker             MH04GH0001      Hyundai         Verna           2022   Blue         Petrol
+
+F) book_service() (example flow)
+--- Book Service ---
+Enter Vehicle ID: 4
+Enter Service Date (YYYY-MM-DD): 2025-02-01
+Enter Service Time (HH:MM:SS): 10:30:00
+Pickup Required? (Yes/No): No
+
+Add service to booking? (yes/no): yes
+Enter Service ID: 2
+Service added! Price: Rs. 800.00
+
+Add service to booking? (yes/no): yes
+Enter Service ID: 7
+Service added! Price: Rs. 400.00
+
+Add service to booking? (yes/no): no
+
+✓ Service booked successfully!
+Booking ID: 101
+Total Estimated Cost: Rs. 1200.00
+
+G) view_bookings()
+--- All Service Bookings ---
+Booking ID   Customer                 Vehicle         Make         Model        Date        Time       Pickup  Status
+---------------------------------------------------------------------------------------------------------------
+101          Alice Parker             MH04GH0001      Hyundai      Verna        2025-02-01  10:30:00   No      Pending
+
+H) complete_service() (example)
+--- Complete Service ---
+Enter Booking ID: 101
+Enter Parts Charges: 200.00
+Enter Payment Method (Cash/Card/UPI): Card
+
+✓ Service completed successfully!
+Service Charges: Rs. 1200.00
+Parts Charges: Rs. 200.00
+Tax (18%): Rs. 252.00
+Total Amount: Rs. 1652.00
+
+I) view_invoices()
+--- All Invoices ---
+Invoice ID    Customer                 Vehicle         Date         Service       Parts        Tax         Total        Status
+------------------------------------------------------------------------------------------------------------------------
+1             Alice Parker             MH04GH0001      2025-02-01   Rs.1200.00    Rs.200.00    Rs.252.00   Rs.1652.00   Paid
+
+J) view_mechanics()
+--- All Mechanics ---
+ID    Name                      Specialization                 Phone           Experience   Status
+-----------------------------------------------------------------------------------------------
+1     Ravi Kumar                Engine Specialist              9876543211      10 years     Active
+2     Suresh Patel              Electrical Systems             9876543212      8 years      Active
+3     Amit Sharma               Body & Paint                   9876543213      12 years     Active
+4     Vijay Singh               General Mechanic               9876543214      6 years      Active
+
+K) generate_report()
+--- Vehicle Service Report ---
+1. Total Customers
+Active Customers: 4
+
+2. Total Vehicles
+Registered Vehicles: 4
+
+3. Total Bookings
+Total Bookings: 1
+
+4. Pending Services
+Pending Services: 0
+
+5. Total Revenue
+Total Revenue: Rs. 1652.00
+
+6. Most Popular Service
+Most Popular Service: Oil Change (1 bookings)
+
+--- End of sample session ---

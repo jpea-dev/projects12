@@ -1,0 +1,841 @@
+HOSPITAL MANAGEMENT SYSTEM DOCUMENTATION
+
+================================================================================
+INTRODUCTION
+================================================================================
+
+The Hospital Management System is a complete solution for managing hospital operations. This system helps you manage patients, doctors, appointments, rooms, and billing all in one place. It is designed to be easy to use with simple menus and straightforward options.
+
+The system stores all your data in binary files so that your information is saved even after you close the program. When you start the program again, all your previous data will be there waiting for you.
+
+
+================================================================================
+SYNOPSIS
+================================================================================
+
+Quick Overview
+
+The Hospital Management System is a complete Python application that helps hospitals and clinics manage their daily operations efficiently. It is a menu-driven system that requires no special technical knowledge to use.
+
+What This System Does
+
+This system manages five main areas of hospital operations:
+
+Patient Records - Store and manage information about patients including their contact details, medical conditions, and treatment status. Every patient gets a unique ID for easy tracking.
+
+Doctor Information - Keep track of all doctors working in your hospital including their specialty, qualifications, and experience. The system knows which doctors are active, on leave, or inactive.
+
+Appointments - Schedule meetings between patients and doctors. The system prevents scheduling conflicts and tracks appointment status from scheduling to completion.
+
+Room Management - Monitor all hospital rooms including ICU beds, general wards, semi-private, and private rooms. Know instantly which rooms are available and which are occupied.
+
+Billing and Payments - Create bills for patient treatments automatically, tracking room costs, medicine expenses, doctor fees, and other charges. Monitor payment status to know who has paid and who still owes money.
+
+Key Features
+
+Automatic ID Generation - The system automatically creates unique identification numbers for patients, doctors, appointments, rooms, and bills. You do not need to manage this yourself.
+
+Permanent Data Storage - All information is saved automatically in binary files. Your data is never lost even if you close the program or restart your computer.
+
+Simple Menu Navigation - Just select numbers from menus to perform tasks. No complicated commands or technical knowledge needed.
+
+Real-time Reporting - Get instant statistics about your hospital including total patients, doctors, appointments, and financial information.
+
+Financial Tracking - Know your hospital's revenue, paid amounts, and pending payments at any time.
+
+Who Should Use This
+
+Hospital administrators managing daily operations
+
+Clinic staff handling patient records
+
+Administrative personnel managing appointments and billing
+
+Hospital managers wanting to track finances and occupancy
+
+Anyone needing simple but powerful hospital data management
+
+
+================================================================================
+HOW TO START THE PROGRAM
+================================================================================
+
+1. Open your terminal or command prompt
+2. Navigate to the folder where hospital_management.py is located
+3. Type: python hospital_management.py
+4. Press Enter
+
+The program will show you a welcome message and then display the main menu.
+
+
+================================================================================
+MAIN MENU OVERVIEW
+================================================================================
+
+When you run the program, you will see the main menu with eight options:
+
+1. Patient Management - Add, view, update, or delete patient records
+2. Doctor Management - Add, view, update, or delete doctor information
+3. Appointment Management - Schedule, view, update, or delete appointments
+4. Room Management - Add, view, or manage hospital rooms
+5. Billing Management - Create bills and manage payments
+6. Reports - View overall statistics and financial information
+7. Load Sample Data - Fill the system with example data to test
+8. Exit - Close the program
+
+
+================================================================================
+PATIENT MANAGEMENT
+================================================================================
+
+What You Can Do
+
+The patient management section allows you to handle all patient-related tasks. You can add new patients, view all patients, search for a specific patient, update their information, or delete a patient record.
+
+Adding a New Patient
+
+When you choose to add a patient, you will be asked to enter the following information:
+
+- Patient name: The full name of the patient
+- Age: How old the patient is
+- Gender: Male, Female, or Other
+- Address: Where the patient lives
+- Phone number: Contact number for the patient
+- Disease or reason: What medical issue the patient is being treated for
+
+After you enter all this information, the system will automatically assign a unique Patient ID to this person. You can use this ID to find the patient later.
+
+Viewing All Patients
+
+This option shows you a complete list of all patients in the system. Each patient's information will be displayed including their ID, name, age, gender, address, phone number, disease, admission date, and current status.
+
+Searching for a Specific Patient
+
+If you know the Patient ID, you can use this option to find that one patient. Simply enter the ID number and the system will show you all the details about that patient.
+
+Updating Patient Information
+
+You can update any patient's information at any time. First, enter the Patient ID. Then you will see a list of things you can change like name, age, address, phone number, disease, or status. Choose what you want to change and enter the new information.
+
+Deleting a Patient
+
+You can remove a patient from the system if needed. Enter the Patient ID and the system will ask you to confirm that you want to delete this patient. Once you confirm, the patient record will be removed.
+
+Patient Status Options
+
+The status of a patient can be:
+- Active: Patient is currently being treated
+- Discharged: Patient has left the hospital
+- Deceased: Patient has passed away
+
+
+================================================================================
+DOCTOR MANAGEMENT
+================================================================================
+
+What You Can Do
+
+The doctor management section lets you manage all doctor information. You can add new doctors, view all doctors, search for a specific doctor, update their details, or remove a doctor from the system.
+
+Adding a New Doctor
+
+To add a doctor, you need to provide the following details:
+
+- Doctor name: The full name of the doctor including title if applicable
+- Specialty: The medical field they specialize in like Cardiology, Neurology, etc
+- Qualification: Their educational credentials like MBBS, MD, DM, etc
+- Phone number: Contact number for the doctor
+- Years of experience: How many years they have been practicing
+
+The system will assign a unique Doctor ID to each new doctor.
+
+Viewing All Doctors
+
+This shows you a complete list of all doctors in the system. You will see their ID, name, specialty, qualifications, phone number, years of experience, and status.
+
+Searching for a Specific Doctor
+
+Enter the Doctor ID to find a particular doctor and see all their details.
+
+Updating Doctor Information
+
+You can change doctor information like their name, specialty, qualifications, phone number, experience, or status. First enter the Doctor ID, then choose what you want to update.
+
+Deleting a Doctor
+
+You can remove a doctor from the system. The system will ask for confirmation before deleting.
+
+Doctor Status Options
+
+- Active: Doctor is available and working
+- On Leave: Doctor is temporarily unavailable
+- Inactive: Doctor is no longer with the hospital
+
+
+================================================================================
+APPOINTMENT MANAGEMENT
+================================================================================
+
+What You Can Do
+
+The appointment management section helps you schedule, view, update, and cancel appointments between patients and doctors.
+
+Scheduling a New Appointment
+
+To schedule an appointment, you need to provide:
+
+- Patient ID: The ID of the patient who needs an appointment
+- Doctor ID: The ID of the doctor the patient wants to see
+- Appointment date and time: When the appointment should happen in the format YYYY-MM-DD HH:MM:SS for example 2026-01-25 10:30:00
+- Reason: Why the patient is seeing the doctor
+
+The system will create the appointment and give it a unique Appointment ID.
+
+Viewing All Appointments
+
+This shows you every appointment in the system with details like appointment ID, patient ID, doctor ID, appointment date and time, reason, status, and when it was created.
+
+Viewing Appointments for a Specific Patient
+
+If you enter a Patient ID, the system will show you all appointments scheduled for that patient only.
+
+Updating an Appointment
+
+You can change an appointment's date and time, the reason for the visit, or its status. First enter the Appointment ID, then choose what you want to update.
+
+Deleting an Appointment
+
+You can cancel an appointment by entering its ID. The system will ask for confirmation before removing it.
+
+Appointment Status Options
+
+- Scheduled: Appointment is planned but not yet done
+- Completed: The appointment has already happened
+- Cancelled: The appointment will not happen
+
+
+================================================================================
+ROOM MANAGEMENT
+================================================================================
+
+What You Can Do
+
+The room management section allows you to add new rooms, view available rooms, and manage which rooms are occupied or empty.
+
+Adding a New Room
+
+To add a room to the hospital, you need to specify:
+
+- Room type: Such as ICU, General Ward, Semi-Private, or Private
+- Capacity: How many beds are in this room
+- Charges per day: How much the room costs per day in rupees
+
+The system will assign a unique Room ID to the new room.
+
+Viewing All Rooms
+
+This shows you a list of all rooms in the hospital. For each room you will see the Room ID, type, capacity, daily charges, whether it is available, and if someone is staying in it which patient.
+
+Viewing Available Rooms
+
+This shows only the rooms that are currently empty and ready for a patient.
+
+Assigning a Patient to a Room
+
+You can assign a patient to a room or mark a room as empty. Enter the Room ID and then enter the Patient ID of the person using the room. If you enter 0, the room will be marked as available for the next patient.
+
+Deleting a Room
+
+You can remove a room from the system if it is no longer needed. The system will ask for confirmation.
+
+Room Status
+
+- Available: The room is empty and ready for a patient
+- Occupied: A patient is currently using this room
+
+
+================================================================================
+BILLING MANAGEMENT
+================================================================================
+
+What You Can Do
+
+The billing section lets you create bills for patients, view all bills, see bills for a specific patient, and update payment status.
+
+Creating a Bill
+
+To create a bill, you need to enter:
+
+- Patient ID: Which patient this bill is for
+- Room charges: How much the patient will be charged for the room in rupees
+- Medicine charges: Cost of medicines in rupees
+- Doctor consultation: Cost of the doctor visit in rupees
+- Other charges: Any extra charges like lab tests or special procedures
+
+The system will automatically calculate the total amount and create a bill with a unique Bill ID.
+
+Viewing All Bills
+
+This shows you every bill in the system. Each bill displays the bill ID, patient ID, charges for room, medicines, doctor, other items, total amount, date the bill was created, and payment status.
+
+Viewing Bills for a Specific Patient
+
+Enter a Patient ID to see all bills for that one patient. The system will also show you the total amount owed by that patient.
+
+Updating Payment Status
+
+You can change the payment status of a bill to show whether it has been paid. First enter the Bill ID, then choose the status:
+
+- Pending: Patient has not paid yet
+- Partial: Patient has paid some of the amount
+- Paid: Patient has paid the full amount
+
+Understanding Your Bills
+
+Each bill tracks the costs associated with a patient's treatment. This helps you manage finances and keep track of who has paid and who still owes money.
+
+
+================================================================================
+REPORTS SECTION
+================================================================================
+
+What Reports Show
+
+The reports section gives you a quick overview of your hospital's activity and finances. When you select reports, you will see:
+
+Total Counts
+
+- Total number of patients in the system
+- Total number of doctors on staff
+- Total number of appointments scheduled
+- Total number of rooms in the hospital
+- Total number of bills created
+
+Financial Information
+
+- Total revenue from all bills
+- Amount that has been paid by patients
+- Amount that is still pending and not yet paid
+
+This helps hospital administrators understand the overall operations and financial status at a glance.
+
+
+================================================================================
+LOADING SAMPLE DATA
+================================================================================
+
+What is Sample Data
+
+Sample data is test information that the system comes with. It includes example patients, doctors, appointments, rooms, and bills. This is useful when you first start using the system and want to see how everything works.
+
+How to Load Sample Data
+
+Simply select option 7 from the main menu. The system will add several example records including:
+
+- 5 sample patients with different medical conditions
+- 5 sample doctors with different specialties
+- 9 sample rooms of various types
+- 3 sample appointments
+- 3 sample bills
+
+After loading sample data, you can immediately practice using all the features of the system.
+
+Important Note
+
+You only need to load sample data once. If you load it multiple times, the original sample data will remain and no new copies will be added. The system is smart enough to avoid duplicates.
+
+
+================================================================================
+DATA STORAGE AND FILES
+================================================================================
+
+Where Your Data is Stored
+
+All your data is automatically saved in a folder called hospital_data inside the same folder as the program. This folder contains five binary files:
+
+- patients.pkl: Contains all patient records
+- doctors.pkl: Contains all doctor records
+- appointments.pkl: Contains all appointment records
+- rooms.pkl: Contains all room records
+- billing.pkl: Contains all billing records
+
+Automatic Saving
+
+Whenever you add, update, or delete any information, the system automatically saves it to these files. You do not need to manually save your work.
+
+Loading Your Data
+
+When you start the program, it automatically loads all your previous data from these files. So all your information will be there exactly as you left it.
+
+Backup Recommendation
+
+Since your hospital data is important, it is a good idea to make backup copies of the hospital_data folder regularly. This protects you from losing information if something goes wrong.
+
+
+================================================================================
+EXAMPLE WORKFLOW
+================================================================================
+
+Here is a typical workflow of how you might use the system:
+
+Step 1: Add a New Patient
+
+Go to Patient Management and add a patient named Rajesh Kumar, age 45, with diabetes. The system gives him Patient ID 1000.
+
+Step 2: Add a Doctor
+
+Go to Doctor Management and add Dr. Suresh Gupta who specializes in Cardiology. He gets Doctor ID 100.
+
+Step 3: Schedule an Appointment
+
+Go to Appointment Management and schedule an appointment between Patient 1000 and Doctor 100 for 2026-01-25 at 10:00 AM for a routine checkup.
+
+Step 4: Assign a Room
+
+Go to Room Management and assign Patient 1000 to Room 202 which is a General Ward room.
+
+Step 5: Create a Bill
+
+Go to Billing Management and create a bill for Patient 1000 with room charges of 1000 rupees, medicine charges of 500 rupees, and doctor consultation of 300 rupees. Total bill is 1800 rupees.
+
+Step 6: Check Reports
+
+Go to Reports to see your hospital statistics and financial information.
+
+
+================================================================================
+TIPS FOR USING THE SYSTEM
+================================================================================
+
+Remember Your IDs
+
+When you create a patient, doctor, or appointment, write down the ID number. You will need this ID to search, update, or delete records later.
+
+Use Unique Information
+
+Make sure doctor and patient names are clear and distinct. This helps avoid confusion when searching for someone.
+
+Update Status Regularly
+
+Keep patient status current by marking them as discharged when they leave the hospital. Similarly, update doctor status if they are on leave.
+
+Check Available Rooms
+
+Before assigning a patient to a room, check which rooms are available. This prevents mistakes.
+
+Manage Payments
+
+Keep track of payment status to know who has paid their bills and who still needs to pay.
+
+Regular Backups
+
+Make copies of your hospital_data folder regularly to prevent data loss.
+
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Problem: Patient ID not found
+
+Solution: Make sure you entered the correct Patient ID. Go to View All Patients to see what IDs exist in the system.
+
+Problem: Cannot schedule appointment
+
+Solution: Make sure both the Patient ID and Doctor ID actually exist in the system. You cannot schedule an appointment for a patient or doctor that does not exist.
+
+Problem: Accidentally deleted a record
+
+Solution: Unfortunately, deletions are permanent. This is why the system asks for confirmation before deleting. You can try to restore from your backup copy if you have one.
+
+Problem: System is running slow
+
+Solution: If you have added thousands of records, the system might take longer to respond. This is normal. Consider archiving old records or starting a new database file.
+
+Problem: Cannot find the hospital_data folder
+
+Solution: The folder is created automatically when you first run the program. Check that you are looking in the same folder where hospital_management.py is located.
+
+
+================================================================================
+KEYBOARD SHORTCUTS AND TIPS
+================================================================================
+
+Menu Navigation
+
+After the system asks for input, just type the number of your choice and press Enter.
+
+Canceling an Operation
+
+If you are in the middle of adding or updating something and want to stop, you can usually press Ctrl+C to interrupt. The program will ask if you want to exit.
+
+Going Back
+
+From any submenu, you can always choose the back option to return to the main menu. This helps you navigate safely through the system.
+
+Entering Dates
+
+When the system asks for a date and time, use this format: YYYY-MM-DD HH:MM:SS
+
+For example: 2026-01-25 14:30:00 means January 25, 2026 at 2:30 PM
+
+
+================================================================================
+SYSTEM REQUIREMENTS
+================================================================================
+
+What You Need
+
+- Python 3.7 or higher
+- The hospital_management.py file
+- A terminal or command prompt
+
+Storage Space
+
+The system uses very little disk space. Even with thousands of records, it will use less than a few megabytes of storage.
+
+Operating System
+
+The system works on Windows, Mac, and Linux computers.
+
+
+================================================================================
+OUTPUT EXAMPLES FOR ALL MODULES
+================================================================================
+
+This section shows you what the system output looks like for each module. These are sample outputs to help you understand what to expect when using different features.
+
+
+PATIENT MANAGEMENT OUTPUT EXAMPLES
+
+When you add a patient, you will see this message:
+
+Patient added successfully! Patient ID: 1000
+
+When you view all patients, the output looks like this:
+
+==================================================
+ALL PATIENTS
+==================================================
+
+    Patient ID: 1000
+    Name: Rajesh Kumar
+    Age: 45
+    Gender: Male
+    Address: 123 Main Street
+    Phone: 9876543210
+    Disease: Diabetes
+    Admission Date: 2026-01-21 10:15:30
+    Status: Active
+
+    Patient ID: 1001
+    Name: Priya Singh
+    Age: 38
+    Gender: Female
+    Address: 456 Oak Avenue
+    Phone: 9876543211
+    Disease: Asthma
+    Admission Date: 2026-01-21 11:20:45
+    Status: Active
+
+
+DOCTOR MANAGEMENT OUTPUT EXAMPLES
+
+When you add a doctor, you will see:
+
+Doctor added successfully! Doctor ID: 100
+
+When you view all doctors:
+
+==================================================
+ALL DOCTORS
+==================================================
+
+    Doctor ID: 100
+    Name: Dr. Suresh Gupta
+    Specialty: Cardiology
+    Qualification: MBBS, MD
+    Phone: 9876543220
+    Experience: 15 years
+    Status: Active
+
+    Doctor ID: 101
+    Name: Dr. Anjali Verma
+    Specialty: Neurology
+    Qualification: MBBS, DM
+    Phone: 9876543221
+    Experience: 12 years
+    Status: Active
+
+
+APPOINTMENT MANAGEMENT OUTPUT EXAMPLES
+
+When you schedule an appointment:
+
+Appointment scheduled successfully! Appointment ID: 500
+
+When you view all appointments:
+
+==================================================
+ALL APPOINTMENTS
+==================================================
+
+    Appointment ID: 500
+    Patient ID: 1000
+    Doctor ID: 100
+    Appointment Date: 2026-01-25 10:00:00
+    Reason: Routine Checkup
+    Status: Scheduled
+    Created Date: 2026-01-21 10:15:30
+
+    Appointment ID: 501
+    Patient ID: 1001
+    Doctor ID: 101
+    Appointment Date: 2026-01-26 14:30:00
+    Reason: Heart Consultation
+    Status: Scheduled
+    Created Date: 2026-01-21 10:16:45
+
+
+ROOM MANAGEMENT OUTPUT EXAMPLES
+
+When you add a room:
+
+Room added successfully! Room ID: 200
+
+When you view all rooms:
+
+==================================================
+ALL ROOMS
+==================================================
+
+    Room ID: 200
+    Type: ICU
+    Capacity: 1 beds
+    Charges per Day: Rs. 5000
+    Status: Available
+    Current Patient ID: None
+
+    Room ID: 201
+    Type: General Ward
+    Capacity: 4 beds
+    Charges per Day: Rs. 1000
+    Status: Occupied
+    Current Patient ID: 1000
+
+When you view available rooms only:
+
+==================================================
+AVAILABLE ROOMS
+==================================================
+
+    Room ID: 200
+    Type: ICU
+    Capacity: 1 beds
+    Charges per Day: Rs. 5000
+    Status: Available
+
+    Room ID: 202
+    Type: Semi-Private
+    Capacity: 2 beds
+    Charges per Day: Rs. 2000
+    Status: Available
+
+
+BILLING MANAGEMENT OUTPUT EXAMPLES
+
+When you create a bill:
+
+Bill created successfully! Bill ID: 4000
+
+When you view all bills:
+
+==================================================
+ALL BILLS
+==================================================
+
+    Bill ID: 4000
+    Patient ID: 1000
+    Room Charges: Rs. 5000
+    Medicine Charges: Rs. 2000
+    Doctor Consultation: Rs. 1000
+    Other Charges: Rs. 0
+    Total Amount: Rs. 8000
+    Bill Date: 2026-01-21 10:15:30
+    Payment Status: Pending
+
+    Bill ID: 4001
+    Patient ID: 1001
+    Room Charges: Rs. 3000
+    Medicine Charges: Rs. 1500
+    Doctor Consultation: Rs. 1500
+    Other Charges: Rs. 500
+    Total Amount: Rs. 6500
+    Bill Date: 2026-01-21 10:16:45
+    Payment Status: Partial
+
+When you view bills for a specific patient:
+
+==================================================
+BILLS FOR PATIENT 1000
+==================================================
+
+    Bill ID: 4000
+    Patient ID: 1000
+    Room Charges: Rs. 5000
+    Medicine Charges: Rs. 2000
+    Doctor Consultation: Rs. 1000
+    Other Charges: Rs. 0
+    Total Amount: Rs. 8000
+    Bill Date: 2026-01-21 10:15:30
+    Payment Status: Pending
+
+Total Amount Due: Rs. 8000
+
+
+REPORTS OUTPUT EXAMPLES
+
+When you view reports, you will see:
+
+==================================================
+REPORTS
+==================================================
+
+Total Patients: 5
+Total Doctors: 5
+Total Appointments: 10
+Total Rooms: 9
+Total Bills: 8
+
+==================================================
+
+Total Revenue (All Bills): Rs. 52300
+Amount Paid: Rs. 18500
+Amount Pending: Rs. 33800
+
+==================================================
+
+
+MENU SCREEN EXAMPLES
+
+Main Menu will look like this:
+
+==================================================
+HOSPITAL MANAGEMENT SYSTEM
+==================================================
+
+1. Patient Management
+2. Doctor Management
+3. Appointment Management
+4. Room Management
+5. Billing Management
+6. Reports
+7. Load Sample Data
+8. Exit
+
+==================================================
+
+Patient Management Submenu:
+
+==================================================
+PATIENT MANAGEMENT
+==================================================
+
+1. Add Patient
+2. View All Patients
+3. Search Patient by ID
+4. Update Patient
+5. Delete Patient
+6. Back to Main Menu
+
+==================================================
+
+
+CONFIRMATION MESSAGES
+
+When you update a record:
+
+Patient updated successfully!
+
+When you delete a record with confirmation:
+
+Are you sure you want to delete patient Rajesh Kumar (yes/no): yes
+
+Patient deleted successfully!
+
+When you assign a patient to a room:
+
+Patient 1000 assigned to room 201
+
+When you mark a room as available:
+
+Room 200 marked as available
+
+When payment status is updated:
+
+Payment status updated successfully!
+
+
+ERROR MESSAGES YOU MIGHT SEE
+
+Patient not found:
+
+Patient with ID 1005 not found!
+
+Invalid input:
+
+Invalid input! Please enter valid data.
+
+Invalid choice from menu:
+
+Invalid choice! Please try again.
+
+No records in system:
+
+No patients found!
+
+Doctor not found:
+
+Doctor with ID 150 not found!
+
+Appointment not found:
+
+Appointment with ID 600 not found!
+
+
+================================================================================
+SUPPORT AND HELP
+================================================================================
+
+Getting More Information
+
+Each menu option in the system has a clear description of what it does. Read the menu text carefully to understand your options.
+
+Understanding Error Messages
+
+If something goes wrong, the system will show you an error message explaining what happened. Read the message carefully to understand the problem.
+
+Testing with Sample Data
+
+If you want to learn how the system works, load the sample data first. This gives you real examples to work with and you can safely practice making changes.
+
+Asking for Help
+
+If you need more help, check this documentation file again. Most common questions and solutions are explained here.
+
+
+================================================================================
+CONCLUSION
+================================================================================
+
+The Hospital Management System is designed to make your job easier by organizing all your hospital information in one place. It is simple to use, reliable, and secure.
+
+By following this documentation, you should be able to use all the features of the system effectively. Remember to keep your data backed up and to use the system regularly to keep your records current and accurate.
+
+For best results, take time to explore each menu option and get comfortable with how the system works. The more you use it, the easier it becomes.
+
+Thank you for using the Hospital Management System.
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================

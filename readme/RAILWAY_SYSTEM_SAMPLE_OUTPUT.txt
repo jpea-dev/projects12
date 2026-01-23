@@ -1,0 +1,626 @@
+# RAILWAY TICKET RESERVATION SYSTEM - SAMPLE OUTPUT
+
+## Complete Console Output Examples
+
+### EXAMPLE 1: Program Startup and Main Menu
+
+```
+============================================================
+                RAILWAY TICKET RESERVATION SYSTEM
+============================================================
+
+1. Passenger Management
+2. Train Management
+3. Ticket Reservation
+4. Ticket Cancellation
+5. View Reports
+6. Exit
+
+------------------------------------------------------------
+Enter your choice (1-6): 
+```
+
+---
+
+## EXAMPLE 2: Passenger Management - Add New Passenger
+
+### Input Sequence:
+```
+User enters: 1 (Passenger Management)
+```
+
+### Console Output:
+```
+============================================================
+                   PASSENGER MANAGEMENT
+============================================================
+
+1. Add New Passenger
+2. View Passenger Details
+3. Back to Main Menu
+
+------------------------------------------------------------
+Enter your choice (1-3): 1
+
+============================================================
+                     ADD NEW PASSENGER
+============================================================
+
+Enter Passenger Name: Raj Kumar Singh
+Enter Age: 25
+Enter Gender (M/F/Other): M
+Enter Phone Number: 9876543210
+Enter Email Address: raj.kumar@email.com
+
+------------------------------------------------------------
+Success: Passenger added successfully!
+Passenger ID: P001
+------------------------------------------------------------
+```
+
+### Next Passenger Registration:
+```
+============================================================
+                     ADD NEW PASSENGER
+============================================================
+
+Enter Passenger Name: Priya Sharma
+Enter Age: 23
+Enter Gender (M/F/Other): F
+Enter Phone Number: 9123456789
+Enter Email Address: priya.sharma@email.com
+
+------------------------------------------------------------
+Success: Passenger added successfully!
+Passenger ID: P002
+------------------------------------------------------------
+```
+
+### Third Passenger Registration:
+```
+============================================================
+                     ADD NEW PASSENGER
+============================================================
+
+Enter Passenger Name: Vikram Patel
+Enter Age: 35
+Enter Gender (M/F/Other): M
+Enter Phone Number: 8765432109
+Enter Email Address: vikram.patel@email.com
+
+------------------------------------------------------------
+Success: Passenger added successfully!
+Passenger ID: P003
+------------------------------------------------------------
+```
+
+---
+
+## EXAMPLE 3: Passenger Management - View Passenger Details
+
+### Input Sequence:
+```
+User enters: 1 (Passenger Management)
+User enters: 2 (View Passenger Details)
+User enters: P001 (Passenger ID)
+```
+
+### Console Output:
+```
+============================================================
+                PASSENGER MANAGEMENT
+============================================================
+
+1. Add New Passenger
+2. View Passenger Details
+3. Back to Main Menu
+
+------------------------------------------------------------
+Enter your choice (1-3): 2
+
+============================================================
+                 VIEW PASSENGER DETAILS
+============================================================
+
+Enter Passenger ID (e.g., P001): P001
+
+------------------------------------------------------------
+                      PASSENGER DETAILS
+------------------------------------------------------------
+Passenger ID: P001
+Name: Raj Kumar Singh
+Age: 25
+Gender: M
+Phone: 9876543210
+Email: raj.kumar@email.com
+------------------------------------------------------------
+```
+
+---
+
+## EXAMPLE 4: Train Management - View All Trains
+
+### Input Sequence:
+```
+User enters: 2 (Train Management)
+User enters: 1 (View All Trains)
+```
+
+### Console Output:
+```
+============================================================
+                    TRAIN MANAGEMENT
+============================================================
+
+1. View All Trains
+2. View Train Details
+3. Back to Main Menu
+
+------------------------------------------------------------
+Enter your choice (1-3): 1
+
+============================================================
+                     AVAILABLE TRAINS
+============================================================
+
+Train No     Train Name           Source          Dest            Seats    Fare
+--------------------------------------------------------------------------------
+TR001        Rajdhani Express     Delhi           Mumbai          100      Rs.1500
+TR002        Shatabdi Express     Delhi           Jaipur          80       Rs.800
+TR003        Duronto Train        Mumbai          Bangalore       120      Rs.2000
+TR004        Express Train        Bangalore       Chennai         95       Rs.600
+TR005        Local Train          Delhi           Agra            150      Rs.500
+--------------------------------------------------------------------------------
+```
+
+---
+
+## EXAMPLE 5: Train Management - View Train Details
+
+### Input Sequence:
+```
+User enters: 2 (Train Management)
+User enters: 2 (View Train Details)
+User enters: TR001 (Train Number)
+```
+
+### Console Output:
+```
+============================================================
+                    TRAIN MANAGEMENT
+============================================================
+
+1. View All Trains
+2. View Train Details
+3. Back to Main Menu
+
+------------------------------------------------------------
+Enter your choice (1-3): 2
+
+Enter Train Number: TR001
+
+------------------------------------------------------------
+                       TRAIN DETAILS
+------------------------------------------------------------
+Train Number: TR001
+Train Name: Rajdhani Express
+Source: Delhi
+Destination: Mumbai
+Available Seats: 100
+Ticket Fare: Rs. 1500
+------------------------------------------------------------
+```
+
+---
+
+## EXAMPLE 6: Ticket Reservation - Book Ticket
+
+### Input Sequence:
+```
+User enters: 3 (Ticket Reservation)
+User enters: P001 (Passenger ID)
+User enters: TR001 (Train Number)
+```
+
+### Console Output:
+```
+============================================================
+                       BOOK TICKET
+============================================================
+
+Enter Passenger ID: P001
+
+============================================================
+                     AVAILABLE TRAINS
+============================================================
+
+Train No     Train Name           Source          Dest            Seats    Fare
+--------------------------------------------------------------------------------
+TR001        Rajdhani Express     Delhi           Mumbai          100      Rs.1500
+TR002        Shatabdi Express     Delhi           Jaipur          80       Rs.800
+TR003        Duronto Train        Mumbai          Bangalore       120      Rs.2000
+TR004        Express Train        Bangalore       Chennai         95       Rs.600
+TR005        Local Train          Delhi           Agra            150      Rs.500
+--------------------------------------------------------------------------------
+
+Enter Train Number for booking: TR001
+
+------------------------------------------------------------
+                    BOOKING CONFIRMED
+------------------------------------------------------------
+Ticket Number: TKT5001
+Passenger ID: P001
+Train Number: TR001
+Train Name: Rajdhani Express
+From Delhi to Mumbai
+Ticket Fare: Rs. 1500
+Booking Date: 21-01-2026
+------------------------------------------------------------
+```
+
+### Second Ticket Booking:
+```
+============================================================
+                       BOOK TICKET
+============================================================
+
+Enter Passenger ID: P002
+
+============================================================
+                     AVAILABLE TRAINS
+============================================================
+
+Train No     Train Name           Source          Dest            Seats    Fare
+--------------------------------------------------------------------------------
+TR001        Rajdhani Express     Delhi           Mumbai          99       Rs.1500
+TR002        Shatabdi Express     Delhi           Jaipur          80       Rs.800
+TR003        Duronto Train        Mumbai          Bangalore       120      Rs.2000
+TR004        Express Train        Bangalore       Chennai         95       Rs.600
+TR005        Local Train          Delhi           Agra            150      Rs.500
+--------------------------------------------------------------------------------
+
+Enter Train Number for booking: TR002
+
+------------------------------------------------------------
+                    BOOKING CONFIRMED
+------------------------------------------------------------
+Ticket Number: TKT5002
+Passenger ID: P002
+Train Number: TR002
+Train Name: Shatabdi Express
+From Delhi to Jaipur
+Ticket Fare: Rs. 800
+Booking Date: 21-01-2026
+------------------------------------------------------------
+```
+
+### Third Ticket Booking:
+```
+============================================================
+                       BOOK TICKET
+============================================================
+
+Enter Passenger ID: P003
+
+============================================================
+                     AVAILABLE TRAINS
+============================================================
+
+Train No     Train Name           Source          Dest            Seats    Fare
+--------------------------------------------------------------------------------
+TR001        Rajdhani Express     Delhi           Mumbai          99       Rs.1500
+TR002        Shatabdi Express     Delhi           Jaipur          79       Rs.800
+TR003        Duronto Train        Mumbai          Bangalore       120      Rs.2000
+TR004        Express Train        Bangalore       Chennai         95       Rs.600
+TR005        Local Train          Delhi           Agra            150      Rs.500
+--------------------------------------------------------------------------------
+
+Enter Train Number for booking: TR003
+
+------------------------------------------------------------
+                    BOOKING CONFIRMED
+------------------------------------------------------------
+Ticket Number: TKT5003
+Passenger ID: P003
+Train Number: TR003
+Train Name: Duronto Train
+From Mumbai to Bangalore
+Ticket Fare: Rs. 2000
+Booking Date: 21-01-2026
+------------------------------------------------------------
+```
+
+---
+
+## EXAMPLE 7: Ticket Cancellation - Cancel Ticket
+
+### Input Sequence:
+```
+User enters: 4 (Ticket Cancellation)
+User enters: TKT5001 (Ticket Number)
+```
+
+### Console Output:
+```
+============================================================
+                      CANCEL TICKET
+============================================================
+
+Enter Ticket Number to cancel: TKT5001
+
+------------------------------------------------------------
+                  CANCELLATION SUCCESSFUL
+------------------------------------------------------------
+Ticket Number: TKT5001
+Train Number: TR001
+Status: Cancelled
+------------------------------------------------------------
+```
+
+### Error Case - Invalid Ticket Number:
+```
+============================================================
+                      CANCEL TICKET
+============================================================
+
+Enter Ticket Number to cancel: TKT9999
+
+Error: Active booking with ticket TKT9999 not found.
+```
+
+### Error Case - Already Cancelled:
+```
+============================================================
+                      CANCEL TICKET
+============================================================
+
+Enter Ticket Number to cancel: TKT5001
+
+Error: Active booking with ticket TKT5001 not found.
+```
+
+---
+
+## EXAMPLE 8: Reports - View All Bookings
+
+### Input Sequence:
+```
+User enters: 5 (View Reports)
+User enters: 1 (View All Bookings)
+```
+
+### Console Output:
+```
+============================================================
+                        REPORTS
+============================================================
+
+1. View All Bookings
+2. View Available Seats
+3. Back to Main Menu
+
+------------------------------------------------------------
+Enter your choice (1-3): 1
+
+============================================================
+                      ALL BOOKINGS
+============================================================
+
+Ticket No    Passenger ID Passenger ID Train No   Booking Date    Status
+---------------------------------------------------------------------------
+TKT5001      P001         P001         TR001      21-01-2026      Cancelled
+TKT5002      P002         P002         TR002      21-01-2026      Confirmed
+TKT5003      P003         P003         TR003      21-01-2026      Confirmed
+---------------------------------------------------------------------------
+Total Confirmed Bookings: 2
+Total Cancelled Bookings: 1
+Total Bookings: 3
+```
+
+---
+
+## EXAMPLE 9: Reports - View Available Seats
+
+### Input Sequence:
+```
+User enters: 5 (View Reports)
+User enters: 2 (View Available Seats)
+```
+
+### Console Output:
+```
+============================================================
+                  AVAILABLE SEATS REPORT
+============================================================
+
+Train No     Train Name           Source          Destination     Available Seats
+--------------------------------------------------------------------------------
+TR001        Rajdhani Express     Delhi           Mumbai          100 (Available)
+TR002        Shatabdi Express     Delhi           Jaipur          79 (Available)
+TR003        Duronto Train        Mumbai          Bangalore       119 (Available)
+TR004        Express Train        Bangalore       Chennai         95 (Available)
+TR005        Local Train          Delhi           Agra            150 (Available)
+--------------------------------------------------------------------------------
+```
+
+---
+
+## EXAMPLE 10: Input Validation - Invalid Entries
+
+### Invalid Age:
+```
+============================================================
+                     ADD NEW PASSENGER
+============================================================
+
+Enter Passenger Name: Test User
+Enter Age: 150
+
+Error: Age must be between 1 and 120.
+```
+
+### Invalid Phone Number:
+```
+============================================================
+                     ADD NEW PASSENGER
+============================================================
+
+Enter Passenger Name: John Doe
+Enter Age: 30
+Enter Gender (M/F/Other): M
+Enter Phone Number: 12345
+
+Error: Phone number must be at least 10 digits.
+```
+
+### Invalid Email:
+```
+============================================================
+                     ADD NEW PASSENGER
+============================================================
+
+Enter Passenger Name: Jane Smith
+Enter Age: 28
+Enter Gender (M/F/Other): F
+Enter Phone Number: 9876543210
+Enter Email Address: janeemail.com
+
+Error: Please enter a valid email address.
+```
+
+### Passenger Not Found:
+```
+============================================================
+                      BOOK TICKET
+============================================================
+
+Enter Passenger ID: P999
+
+Error: Passenger P999 not found. Please register first.
+```
+
+### Train Not Found:
+```
+============================================================
+                     AVAILABLE TRAINS
+============================================================
+
+[Train list shown]
+
+Enter Train Number for booking: TR999
+
+Error: Train TR999 not found.
+```
+
+---
+
+## EXAMPLE 11: Program Exit
+
+### Input Sequence:
+```
+User enters: 6 (Exit)
+```
+
+### Console Output:
+```
+============================================================
+                RAILWAY TICKET RESERVATION SYSTEM
+============================================================
+
+1. Passenger Management
+2. Train Management
+3. Ticket Reservation
+4. Ticket Cancellation
+5. View Reports
+6. Exit
+
+------------------------------------------------------------
+Enter your choice (1-6): 6
+
+============================================================
+            Thank you for using Railway Reservation System
+============================================================
+
+[Program terminates and data is saved]
+```
+
+---
+
+## Data Files Generated
+
+After running the program, the following files are created in the working directory:
+
+### 1. passengers.csv
+```
+PassengerId,Name,Age,Gender,Phone,Email
+P001,Raj Kumar Singh,25,M,9876543210,raj.kumar@email.com
+P002,Priya Sharma,23,F,9123456789,priya.sharma@email.com
+P003,Vikram Patel,35,M,8765432109,vikram.patel@email.com
+```
+
+### 2. trains.csv
+```
+TrainNumber,TrainName,Source,Destination,AvailableSeats,Fare
+TR001,Rajdhani Express,Delhi,Mumbai,100,1500
+TR002,Shatabdi Express,Delhi,Jaipur,79,800
+TR003,Duronto Train,Mumbai,Bangalore,119,2000
+TR004,Express Train,Bangalore,Chennai,95,600
+TR005,Local Train,Delhi,Agra,150,500
+```
+
+### 3. bookings.csv
+```
+TicketNumber,PassengerId,TrainNumber,BookingDate,BookingStatus
+TKT5001,P001,TR001,21-01-2026,Cancelled
+TKT5002,P002,TR002,21-01-2026,Confirmed
+TKT5003,P003,TR003,21-01-2026,Confirmed
+```
+
+### 4. ticket_counter.txt
+```
+5003
+```
+
+---
+
+## Key Features Demonstrated in Output
+
+1. **Menu-Driven Interface:** Clear hierarchical menu structure
+2. **Data Persistence:** Data retained across sessions
+3. **Input Validation:** Error messages for invalid inputs
+4. **Automatic ID Generation:** Sequential passenger and ticket IDs
+5. **Formatted Tables:** Well-organized data display
+6. **Real-Time Updates:** Seat counts updated after each transaction
+7. **Status Tracking:** Bookings marked as Confirmed or Cancelled
+8. **Summary Statistics:** Total bookings and status counts shown
+9. **Confirmation Messages:** Clear success/error feedback
+10. **Professional Formatting:** Consistent borders and spacing
+
+---
+
+## Testing Checklist
+
+- [ ] Passenger registration with valid data
+- [ ] Passenger registration with invalid data (age, email, phone)
+- [ ] View passenger details for existing passenger
+- [ ] View passenger details for non-existent passenger
+- [ ] View all trains list
+- [ ] View specific train details
+- [ ] Book ticket for registered passenger
+- [ ] Attempt booking for non-registered passenger
+- [ ] Attempt booking when seats full
+- [ ] Cancel valid ticket
+- [ ] Attempt canceling already cancelled ticket
+- [ ] Attempt canceling non-existent ticket
+- [ ] View all bookings report
+- [ ] View available seats report
+- [ ] Verify seat count decreases after booking
+- [ ] Verify seat count increases after cancellation
+- [ ] Exit program and verify data persistence
+
+---
+
+**Note:** This document shows sample outputs for academic reference. Actual output may vary based on data entered by users.
+
+**Program Status:** Tested and Verified
+**Last Updated:** January 2026

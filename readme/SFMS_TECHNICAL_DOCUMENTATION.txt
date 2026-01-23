@@ -1,0 +1,574 @@
+================================================================================
+          SCHOOL FEE MANAGEMENT SYSTEM - TECHNICAL DOCUMENTATION
+================================================================================
+
+This document contains:
+1. SQL Table Creation Queries
+2. Sample SQL Data for Testing
+3. Sample Program Output
+4. Testing Scenarios
+
+================================================================================
+SECTION 1: SQL TABLE CREATION QUERIES
+================================================================================
+
+-- Execute these queries in MySQL to set up the database
+
+-- Create Database
+CREATE DATABASE IF NOT EXISTS mydb;
+USE mydb;
+
+-- Table 1: STUDENT TABLE
+CREATE TABLE IF NOT EXISTS student (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    roll_number VARCHAR(20) UNIQUE NOT NULL,
+    class VARCHAR(20) NOT NULL,
+    email VARCHAR(100),
+    phone VARCHAR(15),
+    address VARCHAR(200),
+    date_of_admission DATE NOT NULL,
+    INDEX idx_roll_number (roll_number),
+    INDEX idx_class (class)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- Table 2: FEE TABLE
+CREATE TABLE IF NOT EXISTS fee (
+    fee_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    total_fee DECIMAL(10, 2) NOT NULL,
+    paid_amount DECIMAL(10, 2) DEFAULT 0,
+    pending_amount DECIMAL(10, 2) NOT NULL,
+    status ENUM('PAID', 'PENDING', 'PARTIAL') DEFAULT 'PENDING',
+    assigned_date DATE NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE,
+    INDEX idx_student_id (student_id),
+    INDEX idx_status (status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- Table 3: PAYMENT_RECORD TABLE
+CREATE TABLE IF NOT EXISTS payment_record (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    fee_id INT NOT NULL,
+    payment_amount DECIMAL(10, 2) NOT NULL,
+    payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    payment_method VARCHAR(50),
+    remarks VARCHAR(200),
+    FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE,
+    FOREIGN KEY (fee_id) REFERENCES fee(fee_id) ON DELETE CASCADE,
+    INDEX idx_student_id (student_id),
+    INDEX idx_fee_id (fee_id),
+    INDEX idx_payment_date (payment_date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- Verify table creation
+SHOW TABLES;
+
+-- Display table structures
+DESC student;
+DESC fee;
+DESC payment_record;
+
+================================================================================
+SECTION 2: SAMPLE SQL DATA FOR TESTING
+================================================================================
+
+-- INSERT SAMPLE STUDENT DATA
+INSERT INTO student VALUES
+(1, 'Rajesh Kumar', 'CS-001', '11-A', 'rajesh@school.com', '9876543210', '123 Main St', '2024-06-15'),
+(2, 'Priya Sharma', 'CS-002', '11-A', 'priya@school.com', '9876543211', '456 Oak Ave', '2024-06-15'),
+(3, 'Arjun Singh', 'CS-003', '11-B', 'arjun@school.com', '9876543212', '789 Pine Rd', '2024-06-15'),
+(4, 'Neha Patel', 'CS-004', '11-A', 'neha@school.com', '9876543213', '321 Elm St', '2024-06-15'),
+(5, 'Vikram Reddy', 'CS-005', '11-B', 'vikram@school.com', '9876543214', '654 Maple Dr', '2024-06-15');
+
+-- INSERT SAMPLE FEE DATA
+INSERT INTO fee VALUES
+(1, 1, 50000.00, 50000.00, 0, 'PAID', '2024-01-01'),
+(2, 2, 50000.00, 30000.00, 20000.00, 'PARTIAL', '2024-01-01'),
+(3, 3, 50000.00, 0, 50000.00, 'PENDING', '2024-01-01'),
+(4, 4, 50000.00, 50000.00, 0, 'PAID', '2024-01-01'),
+(5, 5, 50000.00, 15000.00, 35000.00, 'PARTIAL', '2024-01-01');
+
+-- INSERT SAMPLE PAYMENT RECORDS
+INSERT INTO payment_record VALUES
+(1, 1, 1, 50000.00, '2024-02-15 10:30:00', 'Cheque', 'Full payment'),
+(2, 2, 2, 30000.00, '2024-02-20 14:15:00', 'Online', 'Partial payment'),
+(3, 4, 4, 50000.00, '2024-02-22 11:00:00', 'Cash', 'Full payment'),
+(4, 5, 5, 15000.00, '2024-03-01 09:45:00', 'Online', 'First installment');
+
+-- VERIFY DATA
+SELECT * FROM student;
+SELECT * FROM fee;
+SELECT * FROM payment_record;
+
+================================================================================
+SECTION 3: USEFUL SQL QUERIES FOR REFERENCE
+================================================================================
+
+-- Query 1: View all students with their fee status
+SELECT 
+    s.student_id,
+    s.name,
+    s.roll_number,
+    s.class,
+    f.total_fee,
+    f.paid_amount,
+    f.pending_amount,
+    f.status
+FROM student s
+LEFT JOIN fee f ON s.student_id = f.student_id
+ORDER BY s.student_id;
+
+-- Query 2: View students with pending fees
+SELECT 
+    s.student_id,
+    s.name,
+    s.roll_number,
+    f.total_fee,
+    f.pending_amount,
+    f.status
+FROM student s
+JOIN fee f ON s.student_id = f.student_id
+WHERE f.status IN ('PENDING', 'PARTIAL')
+ORDER BY f.pending_amount DESC;
+
+-- Query 3: Calculate total fee collection
+SELECT 
+    COUNT(DISTINCT s.student_id) as total_students,
+    SUM(f.total_fee) as total_assigned_fee,
+    SUM(f.paid_amount) as total_collected_fee,
+    SUM(f.pending_amount) as total_pending_fee,
+    ROUND((SUM(f.paid_amount) / SUM(f.total_fee) * 100), 2) as collection_percentage
+FROM student s
+JOIN fee f ON s.student_id = f.student_id;
+
+-- Query 4: View payment history for a specific student
+SELECT 
+    pr.payment_id,
+    pr.payment_amount,
+    pr.payment_date,
+    pr.payment_method,
+    pr.remarks,
+    s.name,
+    s.roll_number
+FROM payment_record pr
+JOIN student s ON pr.student_id = s.student_id
+WHERE pr.student_id = 1
+ORDER BY pr.payment_date DESC;
+
+-- Query 5: View students grouped by class
+SELECT 
+    s.class,
+    COUNT(s.student_id) as total_students,
+    SUM(f.total_fee) as class_total_fee,
+    SUM(f.paid_amount) as class_collected,
+    SUM(f.pending_amount) as class_pending
+FROM student s
+LEFT JOIN fee f ON s.student_id = f.student_id
+GROUP BY s.class;
+
+================================================================================
+SECTION 4: SAMPLE PROGRAM OUTPUT
+================================================================================
+
+Note: The following is sample console output showing the interaction flow.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 1: PROGRAM START & INITIALIZATION
+
+============================================================
+         WELCOME TO SCHOOL FEE MANAGEMENT SYSTEM
+============================================================
+
+Initializing system...
+✓ Database connection successful!
+
+============================================================
+         SCHOOL FEE MANAGEMENT SYSTEM (SFMS)
+============================================================
+
+1.  Student Management
+2.  Fee Management
+3.  Payment Records
+4.  Reports
+5.  Initialize Database
+6.  Exit
+
+============================================================
+Enter your choice (1-6): 5
+
+⚠️  This will create/reset all tables. Continue? (YES/NO): YES
+
+✓ Tables created successfully!
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 2: ADDING A NEW STUDENT
+
+============================================================
+ADD NEW STUDENT
+============================================================
+Enter Student Name: Rajesh Kumar
+Enter Roll Number (unique): CS-001
+Enter Class (e.g., 11-A): 11-A
+Enter Email: rajesh@school.com
+Enter Phone Number: 9876543210
+Enter Address: 123 Main Street, New Delhi
+
+✓ SUCCESS: Student 'Rajesh Kumar' added successfully!
+  Student ID: 1
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 3: VIEWING STUDENT DETAILS
+
+============================================================
+VIEW STUDENT DETAILS
+============================================================
+Enter Student ID: 1
+
+------------------------------------------------------------
+STUDENT INFORMATION
+------------------------------------------------------------
+Student ID:          1
+Name:                Rajesh Kumar
+Roll Number:         CS-001
+Class:               11-A
+Email:               rajesh@school.com
+Phone:               9876543210
+Address:             123 Main Street, New Delhi
+Date of Admission:   2024-06-15
+------------------------------------------------------------
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 4: ASSIGNING FEE TO STUDENT
+
+============================================================
+ASSIGN FEE TO STUDENT
+============================================================
+Enter Student ID: 1
+Enter Total Fee Amount (in Rs.): 50000
+
+✓ SUCCESS: Fee of Rs. 50000.0 assigned to 'Rajesh Kumar'!
+  Fee ID: 1
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 5: PAYING FEE (PARTIAL PAYMENT)
+
+============================================================
+PAY FEE
+============================================================
+Enter Student ID: 2
+Enter Payment Amount: 30000
+
+Fee Details for 'Priya Sharma':
+Total Fee:     Rs. 50000.0
+Paid Amount:   Rs. 0.0
+Pending:       Rs. 50000.0
+Status:        PENDING
+
+Enter Payment Amount: 30000
+Enter Payment Method (Cash/Cheque/Online): Online
+Enter Remarks (optional): First installment paid
+
+✓ SUCCESS: Payment of Rs. 30000.0 recorded!
+  Remaining Pending: Rs. 20000.0
+  Status: PARTIAL
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 6: VIEWING FEE STATUS
+
+============================================================
+VIEW FEE STATUS
+============================================================
+Enter Student ID: 2
+
+------------------------------------------------------------
+FEE STATUS
+------------------------------------------------------------
+Student Name:        Priya Sharma
+Fee ID:              2
+Total Fee:           Rs. 50000.0
+Paid Amount:         Rs. 30000.0
+Pending Amount:      Rs. 20000.0
+Status:              PARTIAL
+Date Assigned:       2024-01-01
+------------------------------------------------------------
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 7: VIEWING PAYMENT HISTORY
+
+============================================================
+VIEW PAYMENT HISTORY
+============================================================
+Enter Student ID: 2
+
+Payment History for 'Priya Sharma':
+--------------------------------------------------------------------------------
+Payment ID   Amount          Date                 Method          Remarks
+--------------------------------------------------------------------------------
+2            Rs. 30000.00    2024-02-20 14:15:00  Online          First installment paid
+--------------------------------------------------------------------------------
+TOTAL PAID:                  Rs. 30000.00
+--------------------------------------------------------------------------------
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 8: ALL STUDENTS REPORT
+
+============================================================
+ALL STUDENTS REPORT
+============================================================
+
+Total Students: 5
+----------------------------------------------------------------------------------------------------
+ID    Name                      Roll No.     Class      Email                    Phone
+----------------------------------------------------------------------------------------------------
+1     Rajesh Kumar              CS-001       11-A       rajesh@school.com        9876543210
+2     Priya Sharma              CS-002       11-A       priya@school.com         9876543211
+3     Arjun Singh               CS-003       11-B       arjun@school.com         9876543212
+4     Neha Patel                CS-004       11-A       neha@school.com          9876543213
+5     Vikram Reddy              CS-005       11-B       vikram@school.com        9876543214
+----------------------------------------------------------------------------------------------------
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 9: PENDING FEES REPORT
+
+============================================================
+PENDING FEES REPORT
+============================================================
+
+Students with Pending Fees: 3
+-----------------------------------------------------------------------------------------------------------
+ID    Name                 Roll No.   Class    Total       Paid        Pending     Status
+-----------------------------------------------------------------------------------------------------------
+3     Arjun Singh          CS-003     11-B     Rs. 50000.00 Rs. 0.00    Rs. 50000.00 PENDING
+5     Vikram Reddy         CS-005     11-B     Rs. 50000.00 Rs. 15000.00 Rs. 35000.00 PARTIAL
+2     Priya Sharma         CS-002     11-A     Rs. 50000.00 Rs. 30000.00 Rs. 20000.00 PARTIAL
+-----------------------------------------------------------------------------------------------------------
+TOTAL PENDING:                                                           Rs. 105000.00
+-----------------------------------------------------------------------------------------------------------
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 10: TOTAL FEE COLLECTED REPORT
+
+============================================================
+TOTAL FEE COLLECTED REPORT
+============================================================
+
+------------------------------------------------------------
+FINANCIAL SUMMARY
+------------------------------------------------------------
+Total Fee Assigned:      Rs.     250000.00
+Total Fee Collected:     Rs.     125000.00
+Total Pending:           Rs.     125000.00
+------------------------------------------------------------
+Collection Percentage:      50.00%
+------------------------------------------------------------
+
+STUDENT-WISE BREAKDOWN
+------------------------------------------------------------
+Fully Paid:                           2
+Partial Payment:                      2
+Pending:                              1
+------------------------------------------------------------
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 11: ERROR HANDLING - DUPLICATE ROLL NUMBER
+
+============================================================
+ADD NEW STUDENT
+============================================================
+Enter Student Name: John Doe
+Enter Roll Number (unique): CS-001
+Enter Class (e.g., 11-A): 11-C
+Enter Email: john@school.com
+Enter Phone Number: 9876543215
+Enter Address: 987 Birch Lane
+
+❌ ERROR: Roll Number 'CS-001' already exists!
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 12: ERROR HANDLING - INVALID EMAIL
+
+============================================================
+ADD NEW STUDENT
+============================================================
+Enter Student Name: Sarah Ahmed
+Enter Roll Number (unique): CS-006
+Enter Class (e.g., 11-A): 11-A
+Enter Email: sarah_invalid_email
+Enter Phone Number: 9876543216
+Enter Address: 654 Cedar St
+
+❌ Invalid email format!
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 13: DELETE STUDENT RECORD WITH CONFIRMATION
+
+============================================================
+DELETE STUDENT RECORD
+============================================================
+Enter Student ID to delete: 5
+
+⚠️  WARNING: You are about to delete 'Vikram Reddy' and all associated records!
+Are you sure? (YES/NO): YES
+
+✓ SUCCESS: Student record deleted successfully!
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 14: UPDATE STUDENT INFORMATION
+
+============================================================
+UPDATE STUDENT INFORMATION
+============================================================
+Enter Student ID to update: 1
+
+Current Details for Rajesh Kumar:
+Email: rajesh@school.com
+Phone: 9876543210
+Address: 123 Main Street, New Delhi
+
+What would you like to update?
+1. Email
+2. Phone
+3. Address
+4. All
+
+Enter your choice (1-4): 2
+Enter new Phone: 9988776655
+
+✓ SUCCESS: Student information updated successfully!
+
+Press Enter to continue...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SAMPLE OUTPUT 15: PROGRAM EXIT
+
+============================================================
+Thank you for using School Fee Management System!
+Goodbye!
+============================================================
+
+================================================================================
+SECTION 5: TESTING SCENARIOS
+================================================================================
+
+TEST SCENARIO 1: Complete Fee Payment Workflow
+─────────────────────────────────────────────────
+1. Add a new student (Rajesh Kumar)
+2. Assign fee (Rs. 50000)
+3. Pay full fee (Rs. 50000)
+4. View fee status (Should show PAID)
+5. View fee status report (Should show as fully paid)
+
+Expected Result: ✓ Student should appear in "Fully Paid" category
+
+─────────────────────────────────────────────────
+
+TEST SCENARIO 2: Partial Fee Payment Workflow
+─────────────────────────────────────────────────
+1. Add a new student (Priya Sharma)
+2. Assign fee (Rs. 50000)
+3. Pay partial fee (Rs. 30000)
+4. View fee status (Should show PARTIAL, pending = 20000)
+5. Pay remaining fee (Rs. 20000)
+6. View fee status (Should show PAID)
+
+Expected Result: ✓ Status should change from PARTIAL to PAID
+
+─────────────────────────────────────────────────
+
+TEST SCENARIO 3: Multiple Payments with History
+─────────────────────────────────────────────────
+1. Add student (Arjun Singh)
+2. Assign fee (Rs. 60000)
+3. Payment 1: Rs. 20000 (Online)
+4. Payment 2: Rs. 20000 (Cheque)
+5. Payment 3: Rs. 20000 (Cash)
+6. View payment history (Should show 3 entries)
+
+Expected Result: ✓ All 3 payments should appear in history
+
+─────────────────────────────────────────────────
+
+TEST SCENARIO 4: Reports Generation
+─────────────────────────────────────────────────
+1. Add 5 students and assign fees
+2. Record various payments
+3. Generate "All Students" report
+4. Generate "Pending Fees" report
+5. Generate "Total Fee Collected" report
+
+Expected Result: ✓ All reports should display correctly with accurate calculations
+
+─────────────────────────────────────────────────
+
+TEST SCENARIO 5: Data Validation
+─────────────────────────────────────────────────
+1. Try adding student with empty name
+   Expected: Error message shown
+2. Try adding student with duplicate roll number
+   Expected: Error message shown
+3. Try entering invalid email
+   Expected: Error message shown
+4. Try entering non-numeric student ID
+   Expected: Error message shown
+5. Try entering negative fee amount
+   Expected: Error message shown
+
+Expected Result: ✓ All validations should work correctly
+
+─────────────────────────────────────────────────
+
+TEST SCENARIO 6: Database Integrity
+─────────────────────────────────────────────────
+1. Add student with fee record
+2. Delete the student
+3. Try to view deleted student's fees
+4. Check if payment records are also deleted
+
+Expected Result: ✓ Cascading delete should work (all related records deleted)
+
+================================================================================
+END OF TECHNICAL DOCUMENTATION
+================================================================================
